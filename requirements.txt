@@ -3,3 +3,7 @@ uvicorn
 psycopg2-binary
 redis
 sqlalchemy
+sqlalchemy
+psycopg2-binary
+python-dotenv
+redis
