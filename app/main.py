@@ -1,9 +1,7 @@
 from fastapi import FastAPI
 from app.db.database import Base, engine
-from app.models.organization import Organization
+from app.models.organizations import Organization
 from app.core.redis import redis_client
-
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

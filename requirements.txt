@@ -8,3 +8,6 @@ psycopg2-binary
 python-dotenv
 redis
 alembic
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
