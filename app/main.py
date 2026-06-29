@@ -2,8 +2,11 @@ from fastapi import FastAPI
 from app.db.database import Base, engine
 from app.models.organizations import Organization
 from app.core.redis import redis_client
+from app.api import auth
 
 app = FastAPI()
+
+app.include_router(auth.router)
 
 @app.get("/health")
 def health():

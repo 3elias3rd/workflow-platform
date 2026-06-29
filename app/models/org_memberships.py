@@ -7,12 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from app.db.database import Base
-
-
-class RoleEnum(str, enum.Enum):
-    admin = "admin"
-    member = "member"
-
+from app.core.enums import RoleEnum
 
 class OrgMembership(Base):
     __tablename__ = "org_memberships"
