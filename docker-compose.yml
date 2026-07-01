@@ -9,6 +9,7 @@ services:
     volumes:
       - ./app:/app/app
       - ./alembic:/app/alembic
+      - ./tests:/app/tests
 
   db:
     image: postgres:16
