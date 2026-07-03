@@ -3,10 +3,7 @@ uvicorn
 psycopg2-binary
 redis
 sqlalchemy
-sqlalchemy
-psycopg2-binary
 python-dotenv
-redis
 alembic
 python-jose[cryptography]
 passlib[bcrypt]
@@ -15,3 +12,4 @@ bcrypt==4.0.1
 httpx
 starlette
 pytest
+celery

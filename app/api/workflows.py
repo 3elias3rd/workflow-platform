@@ -10,9 +10,18 @@ from app.schemas.workflows import WorkflowCreate
 router = APIRouter(prefix="/workflows", tags=["workflows"])
 
 @router.get("/")
-def get_workflow(db: Session = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
-       workflows = db.query(Workflow).filter(Workflow.org_id == current_user.org_id).all()
-       return workflows
+def list_workflows(db: Session = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
+    workflows = db.query(Workflow).filter(Workflow.org_id == current_user.org_id).all()
+    return workflows
+
+
+@router.get("/{workflow_id}")
+def get_workflow(workflow_id: str, db: Session = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
+    workflow = db.query(Workflow).filter(Workflow.org_id == current_user.org_id, Workflow.id == workflow_id).first()
+    if not workflow:
+         raise HTTPException(status_code=404, detail="Workflow not found")
+    return workflow
+
 
 @router.post("/")
 def create_workflow(workflow: WorkflowCreate, db: Session = Depends(get_db), current_user: CurrentUser = Depends(require_role("admin"))):
@@ -26,10 +35,3 @@ def create_workflow(workflow: WorkflowCreate, db: Session = Depends(get_db), cur
     db.refresh(new_workflow)
 
     return new_workflow
-
-@router.get("/{workflow_id}")
-def workflow_by_id(workflow_id: str, db: Session = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
-    workflow = db.query(Workflow).filter(Workflow.org_id == current_user.org_id, Workflow.id == workflow_id).first()
-    if not workflow:
-         raise HTTPException(status_code=404, detail="Workflow not found")
-    return workflow

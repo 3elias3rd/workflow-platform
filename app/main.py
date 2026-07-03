@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Depends
-from app.models.organizations import Organization
 from app.core.redis import redis_client
-from app.api import auth
-from app.api import workflows
+from app.api import auth, triggers, workflows, actions
+
 
 app = FastAPI()
 
 app.include_router(auth.router)
 app.include_router(workflows.router)
+app.include_router(triggers.router)
+app.include_router(actions.router)
 
 @app.get("/health")
 def health():

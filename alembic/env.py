@@ -6,8 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.db.database import Base
-from app.models import Organization, User, OrgMembership, Workflow
-
+from app.models import Organization, User, OrgMembership, Workflow, Trigger, Action, WorkflowExecution
 import os
 
 
