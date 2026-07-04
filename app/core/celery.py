@@ -8,4 +8,7 @@ REDIS_URL = os.getenv("REDIS_URL")
 
 celery_app = Celery("workflow-platform", broker=REDIS_URL, backend=REDIS_URL)
 
-celery_app.conf.update(task_track_started=True)
+celery_app.conf.update(
+    task_track_started=True,
+    imports="app.workers.tasks"
+)

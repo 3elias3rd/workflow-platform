@@ -9,11 +9,11 @@ services:
   
   worker:
     build: .
-    command: celery -A app.core.celery worker --longlevel=info
+    command: celery -A app.core.celery worker --loglevel=info
     depends_on:
-      - db:
+      db:
         condition: service_healthy
-      - redis:
+      redis:
         condition: service_started
     volumes:
       - ./app:/app/app
