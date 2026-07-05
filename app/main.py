@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from app.core.redis import redis_client
-from app.api import auth, triggers, workflows, actions, webhooks
+from app.api import auth, triggers, workflows, actions, webhooks, executions
 
 
 app = FastAPI()
@@ -10,6 +10,7 @@ app.include_router(workflows.router)
 app.include_router(triggers.router)
 app.include_router(actions.router)
 app.include_router(webhooks.router)
+app.include_router(executions.router)
 
 @app.get("/health")
 def health():
