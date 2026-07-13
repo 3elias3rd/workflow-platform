@@ -20,3 +20,10 @@ class ExecutionStatusEnum(str, enum.Enum):
     completed = "completed"
     failed = "failed"
     cancelled = "cancelled"
+
+class ActionStatusEnum(str, enum.Enum):
+    pending = "pending"
+    running = "running"
+    completed = "completed"
+    failed = "failed"
+    skipped = "skipped"

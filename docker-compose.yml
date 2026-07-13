@@ -6,10 +6,28 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+    - ./app:/app/app
+    - ./alembic:/app/alembic
   
   worker:
     build: .
     command: celery -A app.core.celery worker --loglevel=info
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./app:/app/app
+      - ./alembic:/app/alembic
+      - ./tests:/app/tests
+
+  beat:
+    build: .
+    command: celery -A app.core.celery beat --loglevel=info
     depends_on:
       db:
         condition: service_healthy
@@ -26,7 +44,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=workflow_db
-      - REDIS_URL=redis://redis:6379/0
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
