@@ -20,6 +20,7 @@ class ExecutionStatusEnum(str, enum.Enum):
     completed = "completed"
     failed = "failed"
     cancelled = "cancelled"
+    dead_letter = "dead_letter"
 
 class ActionStatusEnum(str, enum.Enum):
     pending = "pending"
